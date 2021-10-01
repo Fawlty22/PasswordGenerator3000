@@ -14,15 +14,16 @@ let passLength = ''
 
 /*Generate Length Function*/
 function generateLength() {
-    passLength = prompt('How many characters should your password include?')
-    
-    if (passLength != Number) {
-        passLength = parseInt(passLength, 10)
+    passLength = parseInt(prompt('How many characters should your password include?'), 10)
+
+    if (isNaN(passLength)){      
+        alert('Please enter a number.')
+        generateLength();
     }
 
-    while (passLength < 8 || passLength > 128) {
-    confirm('Please choose a length between 8 and 128 characters.')
-    passLength = prompt('How many characters should your password include?')
+    if (passLength < 8 || passLength > 128) {
+        confirm('Please choose a length between 8 and 128 characters.')
+        generateLength();
     }
 }
 
