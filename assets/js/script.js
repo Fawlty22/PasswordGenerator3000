@@ -41,72 +41,36 @@ function generatePassword() {
     generateLength();
     generateCharacterTypes();
 
-    /*Only Uppercase Chosen*/
-    if (trueUppercase && !trueLowercase && !trueNumbers && !trueSpecialcase) {
-        for (i = 0; i < passLength; i++) {
+if (trueUppercase || trueLowercase || trueNumbers || trueSpecialcase) {
+    for (i = 0; i < passLength; i++){
+        if (trueUppercase) {
             var randomNumber = Math.floor(Math.random() * uppercase.length);
-            newPassword += uppercase[randomNumber];
+            newPasswordPre += uppercase[randomNumber];
         }
-    }
-
-    /*Only Lowercase Chosen*/
-    else if (!trueUppercase && trueLowercase && !trueNumbers && !trueSpecialcase) {
-        for (i = 0; i < passLength; i++) {
+        if (trueLowercase) {
             var randomNumber = Math.floor(Math.random() * lowercase.length);
-            newPassword += lowercase[randomNumber];
+            newPasswordPre += lowercase[randomNumber];
         }
-    }
-
-    /*Only Special Chosen*/
-    else if (!trueUppercase && !trueLowercase && !trueNumbers && trueSpecialcase) {
-        for (i = 0; i < passLength; i++) {
-            var randomNumber = Math.floor(Math.random() * specialcase.length);
-            newPassword += specialcase[randomNumber];
-        }
-    }
-
-    /*Only Numbers Chosen*/
-    else if (!trueUppercase && !trueLowercase && trueNumbers && !trueSpecialcase) {
-        for (i = 0; i < passLength; i++) {
+        if (trueNumbers) {
             var randomNumber = Math.floor(Math.random() * numbers.length);
-            newPassword += numbers[randomNumber];
+            newPasswordPre += numbers[randomNumber];
         }
-    }  
-
-    /* Multiple Chosen*/
-    else if (trueUppercase || trueLowercase || trueNumbers || trueSpecialcase) {
-        for (i = 0; i < passLength; i++){
-            if (trueUppercase) {
-                var randomNumber = Math.floor(Math.random() * uppercase.length);
-                newPasswordPre += uppercase[randomNumber];
-            }
-            if (trueLowercase) {
-                var randomNumber = Math.floor(Math.random() * lowercase.length);
-                newPasswordPre += lowercase[randomNumber];
-            }
-            if (trueNumbers) {
-                var randomNumber = Math.floor(Math.random() * numbers.length);
-                newPasswordPre += numbers[randomNumber];
-            }
-            if (trueSpecialcase) {
-                var randomNumber = Math.floor(Math.random() * specialcase.length);
-                newPasswordPre += specialcase[randomNumber];
-            }
-        }
-
-        for (i = 0; i < passLength; i++){
-            var randomNumber = Math.floor(Math.random() * newPasswordPre.length);
-            newPassword += newPasswordPre[randomNumber];
+        if (trueSpecialcase) {
+            var randomNumber = Math.floor(Math.random() * specialcase.length);
+            newPasswordPre += specialcase[randomNumber];
         }
     }
 
-    /* Nothing Chosen */
-    else {
-        alert('Please choose at least ONE character type.')
-        generatePassword();
-    }
-
-
+    for (i = 0; i < passLength; i++){
+        var randomNumber = Math.floor(Math.random() * newPasswordPre.length);
+        newPassword += newPasswordPre[randomNumber];
+    }   
+}
+/* Nothing Chosen */
+else {
+    alert('Please choose at least ONE character type.')
+    generatePassword();
+}
 
 return newPassword;
 }
